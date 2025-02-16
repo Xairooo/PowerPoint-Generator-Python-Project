@@ -99,13 +99,9 @@ def generate():
         presenter_name = request.form.get('presenter_name')
         insert_image = 'insert_image' in request.form
 
-        user_message = f"I want you to come up with the idea for the PowerPoint. The number of slides is {number_of_slide}. " \
-                       f"The content is: {user_text}.The title of content for each slide must be unique, " \
-                       f"and extract the most important keyword within two words for each slide. Summarize the content for each slide. "
-        
-        
+        prompt = """[ {"title": "[Basic Information of Message]", "content": "[Date of birth, where he was born]"}, {"title": "[Football career]", "content": "[Brief description, bullet points, or detailed text]"}, ... ]"""       
 
-        # assistant_response = chat_development(user_message)
+        assistant_response = chat_development(prompt)
         # # Check the response (for debug)
         # print(f"Assistant Response:\n{assistant_response}")
         slides_content = {"slides":[{"title":"Introduction – Overview of AI Growth","layout":{"type":"Title","sections":[{"position":"top","type":"title","content":"The Future of AI"},{"position":"center","type":"subtitle","content":"Overview of AI Growth"},{"position":"background","type":"image","description":"Futuristic tech design"}]}},{"title":"Key Trends – AI in Healthcare, Finance, and Education","layout":{"type":"Grid","sections":[{"position":"top","type":"title","content":"Key Trends in AI"},{"position":"main","type":"three-columns","columns":[{"heading":"Healthcare","points":["Diagnostics","Personalized Medicine"],"icon":"🏥"},{"heading":"Finance","points":["Fraud Detection","Algorithmic Trading"],"icon":"💰"},{"heading":"Education","points":["Adaptive Learning","AI Tutors"],"icon":"🎓"}]}]}},{"title":"Challenges – Ethical Concerns and Job Displacement","layout":{"type":"List","sections":[{"position":"top","type":"title","content":"AI Challenges"},{"position":"main","type":"two-columns","columns":[{"heading":"Ethical Concerns","points":["Bias","Privacy","Accountability"],"icon":"⚖️"},{"heading":"Job Displacement","points":["Automation impact","Reskilling needs"],"icon":"🛠️"}]}]}},{"title":"Conclusion – Summary and Future Outlook","layout":{"type":"Summary","sections":[{"position":"top","type":"title","content":"Conclusion"},{"position":"main","type":"bullets","items":["AI is transforming industries","Key trends in healthcare, finance, and education","Addressing ethical concerns and job displacement"]},{"position":"bottom","type":"highlight","content":"The future of AI is promising, but responsible development is key."}]}}]}

@@ -6,17 +6,6 @@ Can you suggest suitable slide layouts for each slide in JSON format?
 
 Automatically identify content structures such as lists, comparisons, timelines, summaries, etc.
 Use only these layout types:
-TITLE
-TITLE_AND_CONTENT
-SECTION_HEADER
-TWO_CONTENT
-COMPARISON
-TITLE_ONLY
-BLANK
-CONTENT_WITH_CAPTION
-PICTURE_WITH_CAPTION
-TITLE_AND_VERTICAL_TEXT
-VERTICAL_TITLE_AND_TEXT
 Return the entire response as a well-structured JSON object following this concise pattern:
 {
   "slides": [
