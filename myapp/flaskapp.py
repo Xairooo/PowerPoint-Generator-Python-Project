@@ -7,7 +7,7 @@ from flask_bcrypt import Bcrypt
 from database import db
 from models import User
 from utils.gpt_generate import chat_development
-from utils.text_pp import parse_response, create_ppt
+from utils.text_pp import parse_response, create_ppt, create_ppt_v2
 from dotenv import load_dotenv
 
 load_dotenv()  # This loads the .env file
@@ -83,7 +83,15 @@ def logout():
 
 @app.route('/generator', methods=['GET', 'POST'])
 def generate():
+    # data = { 
+    #         "Modules" : 15, 
+    #         "Subject" : "Data Structures and Algorithms", 
+    #     } 
     if request.method == 'POST':
+        print(request.content_type)
+        custom_template = request.files['custom_template']
+        print(custom_template)
+        # file_input.save(f'./uploads/{file_input.filename}')
         number_of_slide = request.form.get('number_of_slide')
         user_text = request.form.get('user_text')
         template_choice = request.form.get('template_choice')
@@ -94,12 +102,17 @@ def generate():
         user_message = f"I want you to come up with the idea for the PowerPoint. The number of slides is {number_of_slide}. " \
                        f"The content is: {user_text}.The title of content for each slide must be unique, " \
                        f"and extract the most important keyword within two words for each slide. Summarize the content for each slide. "
+        
+        
 
-        assistant_response = chat_development(user_message)
-        # Check the response (for debug)
-        print(f"Assistant Response:\n{assistant_response}")
-        slides_content = parse_response(assistant_response)
-        create_ppt(slides_content, template_choice, presentation_title, presenter_name, insert_image)
+        # assistant_response = chat_development(user_message)
+        # # Check the response (for debug)
+        # print(f"Assistant Response:\n{assistant_response}")
+        slides_content = {"slides":[{"title":"Introduction – Overview of AI Growth","layout":{"type":"Title","sections":[{"position":"top","type":"title","content":"The Future of AI"},{"position":"center","type":"subtitle","content":"Overview of AI Growth"},{"position":"background","type":"image","description":"Futuristic tech design"}]}},{"title":"Key Trends – AI in Healthcare, Finance, and Education","layout":{"type":"Grid","sections":[{"position":"top","type":"title","content":"Key Trends in AI"},{"position":"main","type":"three-columns","columns":[{"heading":"Healthcare","points":["Diagnostics","Personalized Medicine"],"icon":"🏥"},{"heading":"Finance","points":["Fraud Detection","Algorithmic Trading"],"icon":"💰"},{"heading":"Education","points":["Adaptive Learning","AI Tutors"],"icon":"🎓"}]}]}},{"title":"Challenges – Ethical Concerns and Job Displacement","layout":{"type":"List","sections":[{"position":"top","type":"title","content":"AI Challenges"},{"position":"main","type":"two-columns","columns":[{"heading":"Ethical Concerns","points":["Bias","Privacy","Accountability"],"icon":"⚖️"},{"heading":"Job Displacement","points":["Automation impact","Reskilling needs"],"icon":"🛠️"}]}]}},{"title":"Conclusion – Summary and Future Outlook","layout":{"type":"Summary","sections":[{"position":"top","type":"title","content":"Conclusion"},{"position":"main","type":"bullets","items":["AI is transforming industries","Key trends in healthcare, finance, and education","Addressing ethical concerns and job displacement"]},{"position":"bottom","type":"highlight","content":"The future of AI is promising, but responsible development is key."}]}}]}
+        # print(type(slides_content))
+        # create_ppt([], custom_template, presentation_title, presenter_name, insert_image)
+        create_ppt_v2([], custom_template, presentation_title, presenter_name, insert_image)
+    # return jsonify(data)
 
     return render_template('generator.html', title='Generate')
 

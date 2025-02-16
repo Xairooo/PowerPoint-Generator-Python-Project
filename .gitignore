@@ -4,3 +4,6 @@ instance/site.db
 *.pyc
 .DS_Store
 __pycache__/
+myapp/generated
+.venv/
+venv/

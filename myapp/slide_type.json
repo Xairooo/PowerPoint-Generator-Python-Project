@@ -1,0 +1,757 @@
+{
+    "layout_types": [
+        {
+            "type": "Title",
+            "description": "A slide with a title and subtitle, often for introductions or section headers.",
+            "example": {
+                "type": "Title",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "Welcome to the Presentation"
+                    },
+                    {
+                        "position": "center",
+                        "type": "subtitle",
+                        "content": "Presented by John Doe"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "List",
+            "description": "A bullet-point list of items or key points.",
+            "example": {
+                "type": "List",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "Employee Benefits"
+                    },
+                    {
+                        "position": "main",
+                        "type": "bullets",
+                        "items": [
+                            "Health Insurance",
+                            "Flexible Hours",
+                            "Retirement Plan"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Grid",
+            "description": "A multi-column layout for comparing categories or listing features.",
+            "example": {
+                "type": "Grid",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Applications"
+                    },
+                    {
+                        "position": "main",
+                        "type": "three-columns",
+                        "columns": [
+                            {
+                                "heading": "Healthcare",
+                                "points": [
+                                    "Diagnostics",
+                                    "Telemedicine"
+                                ]
+                            },
+                            {
+                                "heading": "Finance",
+                                "points": [
+                                    "Fraud Detection",
+                                    "Trading"
+                                ]
+                            },
+                            {
+                                "heading": "Education",
+                                "points": [
+                                    "E-learning",
+                                    "Virtual Tutors"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Timeline",
+            "description": "A chronological representation of events, milestones, or processes.",
+            "example": {
+                "type": "Timeline",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Development Timeline"
+                    },
+                    {
+                        "position": "main",
+                        "type": "steps",
+                        "steps": [
+                            {
+                                "year": "1956",
+                                "event": "AI Concept Introduced"
+                            },
+                            {
+                                "year": "1997",
+                                "event": "Deep Blue Defeats Kasparov"
+                            },
+                            {
+                                "year": "2016",
+                                "event": "AlphaGo Defeats Lee Sedol"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Chart",
+            "description": "A visual representation of data using charts such as bar, line, or pie charts.",
+            "example": {
+                "type": "Chart",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Market Growth"
+                    },
+                    {
+                        "position": "main",
+                        "type": "bar-chart",
+                        "data": [
+                            {
+                                "year": "2020",
+                                "value": 100
+                            },
+                            {
+                                "year": "2025",
+                                "value": 250
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Quote",
+            "description": "A slide highlighting a key quote or statement.",
+            "example": {
+                "type": "Quote",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "Inspirational Quote"
+                    },
+                    {
+                        "position": "main",
+                        "type": "quote",
+                        "content": "\"AI will not replace humans, but humans with AI will replace those without.\" – Kai-Fu Lee"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Table",
+            "description": "A slide presenting data in a structured table format.",
+            "example": {
+                "type": "Table",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Models Comparison"
+                    },
+                    {
+                        "position": "main",
+                        "type": "table",
+                        "columns": [
+                            "Model",
+                            "Accuracy",
+                            "Speed"
+                        ],
+                        "rows": [
+                            [
+                                "GPT-3",
+                                "92%",
+                                "Fast"
+                            ],
+                            [
+                                "BERT",
+                                "89%",
+                                "Moderate"
+                            ]
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Summary",
+            "description": "A slide that summarizes key points or provides a conclusion.",
+            "example": {
+                "type": "Summary",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "Key Takeaways"
+                    },
+                    {
+                        "position": "main",
+                        "type": "bullets",
+                        "items": [
+                            "AI is transforming industries.",
+                            "Ethical challenges must be addressed.",
+                            "Continuous learning is essential."
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Comparison",
+            "description": "A slide comparing two or more items side-by-side.",
+            "example": {
+                "type": "Comparison",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI vs Human Capabilities"
+                    },
+                    {
+                        "position": "main",
+                        "type": "two-columns",
+                        "columns": [
+                            {
+                                "heading": "AI",
+                                "points": [
+                                    "Fast processing",
+                                    "24/7 availability",
+                                    "Data-driven decisions"
+                                ]
+                            },
+                            {
+                                "heading": "Humans",
+                                "points": [
+                                    "Creativity",
+                                    "Emotional intelligence",
+                                    "Ethical reasoning"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Process",
+            "description": "A slide showing a step-by-step process or workflow.",
+            "example": {
+                "type": "Process",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Model Training Process"
+                    },
+                    {
+                        "position": "main",
+                        "type": "steps",
+                        "steps": [
+                            {
+                                "step": 1,
+                                "description": "Data Collection"
+                            },
+                            {
+                                "step": 2,
+                                "description": "Data Preprocessing"
+                            },
+                            {
+                                "step": 3,
+                                "description": "Model Training"
+                            },
+                            {
+                                "step": 4,
+                                "description": "Model Evaluation"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Dashboard",
+            "description": "A slide with multiple data widgets, useful for reporting metrics or KPIs.",
+            "example": {
+                "type": "Dashboard",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI System Performance"
+                    },
+                    {
+                        "position": "main",
+                        "type": "grid",
+                        "widgets": [
+                            {
+                                "type": "metric",
+                                "label": "Accuracy",
+                                "value": "92%"
+                            },
+                            {
+                                "type": "metric",
+                                "label": "Uptime",
+                                "value": "99.9%"
+                            },
+                            {
+                                "type": "pie-chart",
+                                "label": "Resource Usage",
+                                "segments": [
+                                    "CPU: 50%",
+                                    "Memory: 30%",
+                                    "Other: 20%"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Portfolio",
+            "description": "A slide showcasing multiple projects or case studies.",
+            "example": {
+                "type": "Portfolio",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Success Stories"
+                    },
+                    {
+                        "position": "main",
+                        "type": "gallery",
+                        "items": [
+                            {
+                                "title": "AI in Healthcare",
+                                "image": "healthcare.png",
+                                "description": "Improved diagnosis rates."
+                            },
+                            {
+                                "title": "AI in Finance",
+                                "image": "finance.png",
+                                "description": "Fraud detection solutions."
+                            },
+                            {
+                                "title": "AI in Retail",
+                                "image": "retail.png",
+                                "description": "Personalized recommendations."
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "CallToAction",
+            "description": "A slide prompting the audience to take action.",
+            "example": {
+                "type": "CallToAction",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "Join the AI Revolution"
+                    },
+                    {
+                        "position": "main",
+                        "type": "highlight",
+                        "content": "Sign up today to access our AI tools and resources."
+                    },
+                    {
+                        "position": "bottom",
+                        "type": "button",
+                        "label": "Get Started",
+                        "link": "https://example.com/signup"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Gallery",
+            "description": "A slide displaying multiple images or visual examples.",
+            "example": {
+                "type": "Gallery",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI in Action"
+                    },
+                    {
+                        "position": "main",
+                        "type": "image-grid",
+                        "images": [
+                            {
+                                "src": "ai_robot.png",
+                                "caption": "AI-powered Robots"
+                            },
+                            {
+                                "src": "ai_drone.png",
+                                "caption": "AI-controlled Drones"
+                            },
+                            {
+                                "src": "ai_factory.png",
+                                "caption": "AI in Manufacturing"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Video",
+            "description": "A slide with a video demonstration or clip.",
+            "example": {
+                "type": "Video",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI in Healthcare"
+                    },
+                    {
+                        "position": "main",
+                        "type": "video",
+                        "source": "https://example.com/ai-healthcare.mp4",
+                        "caption": "Watch how AI assists doctors in diagnosis."
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Cover",
+            "description": "A full-page slide often used for the cover or section breaks.",
+            "example": {
+                "type": "Cover",
+                "sections": [
+                    {
+                        "position": "center",
+                        "type": "title",
+                        "content": "The Future of AI"
+                    },
+                    {
+                        "position": "bottom",
+                        "type": "subtitle",
+                        "content": "Presented by John Doe"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Agenda",
+            "description": "A slide listing the topics to be covered in the presentation.",
+            "example": {
+                "type": "Agenda",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "Agenda"
+                    },
+                    {
+                        "position": "main",
+                        "type": "numbered-list",
+                        "items": [
+                            "Introduction to AI",
+                            "Key Trends",
+                            "Challenges",
+                            "Future Outlook"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "ProblemSolution",
+            "description": "A slide presenting a problem and the corresponding solution.",
+            "example": {
+                "type": "ProblemSolution",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI in Healthcare"
+                    },
+                    {
+                        "position": "main",
+                        "type": "two-columns",
+                        "columns": [
+                            {
+                                "heading": "Problem",
+                                "points": [
+                                    "Delayed diagnosis",
+                                    "High operational costs"
+                                ]
+                            },
+                            {
+                                "heading": "Solution",
+                                "points": [
+                                    "AI-powered diagnostics",
+                                    "Automated patient management"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "FAQ",
+            "description": "A slide displaying frequently asked questions and answers.",
+            "example": {
+                "type": "FAQ",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "Frequently Asked Questions"
+                    },
+                    {
+                        "position": "main",
+                        "type": "qa-list",
+                        "items": [
+                            {
+                                "question": "How does AI improve efficiency?",
+                                "answer": "By automating repetitive tasks and providing insights through data analysis."
+                            },
+                            {
+                                "question": "Is AI safe?",
+                                "answer": "With proper ethical frameworks and regulations, AI can be developed and deployed safely."
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Testimonial",
+            "description": "A slide highlighting feedback, quotes, or endorsements from customers or experts.",
+            "example": {
+                "type": "Testimonial",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "What Experts Say"
+                    },
+                    {
+                        "position": "main",
+                        "type": "quote",
+                        "content": "\"AI is transforming industries and driving innovation at an unprecedented pace.\" – Dr. Jane Smith, AI Researcher"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "SWOT",
+            "description": "A slide displaying a SWOT analysis (Strengths, Weaknesses, Opportunities, Threats).",
+            "example": {
+                "type": "SWOT",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Industry SWOT Analysis"
+                    },
+                    {
+                        "position": "main",
+                        "type": "four-columns",
+                        "columns": [
+                            {
+                                "heading": "Strengths",
+                                "points": [
+                                    "High efficiency",
+                                    "Scalability"
+                                ]
+                            },
+                            {
+                                "heading": "Weaknesses",
+                                "points": [
+                                    "High cost",
+                                    "Data dependency"
+                                ]
+                            },
+                            {
+                                "heading": "Opportunities",
+                                "points": [
+                                    "New markets",
+                                    "Partnerships"
+                                ]
+                            },
+                            {
+                                "heading": "Threats",
+                                "points": [
+                                    "Regulations",
+                                    "Public mistrust"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "MindMap",
+            "description": "A slide showing a central idea with connected branches, useful for brainstorming concepts.",
+            "example": {
+                "type": "MindMap",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Impact Areas"
+                    },
+                    {
+                        "position": "main",
+                        "type": "mindmap",
+                        "center": "AI",
+                        "branches": [
+                            {
+                                "title": "Healthcare",
+                                "subpoints": [
+                                    "Diagnostics",
+                                    "Telemedicine"
+                                ]
+                            },
+                            {
+                                "title": "Finance",
+                                "subpoints": [
+                                    "Fraud detection",
+                                    "Algorithmic trading"
+                                ]
+                            },
+                            {
+                                "title": "Education",
+                                "subpoints": [
+                                    "Personalized learning",
+                                    "Virtual tutors"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Roadmap",
+            "description": "A slide showing a timeline with milestones, useful for project planning or future goals.",
+            "example": {
+                "type": "Roadmap",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Development Roadmap"
+                    },
+                    {
+                        "position": "main",
+                        "type": "timeline",
+                        "milestones": [
+                            {
+                                "year": "2025",
+                                "goal": "AI in 50% of healthcare facilities"
+                            },
+                            {
+                                "year": "2030",
+                                "goal": "AI-powered autonomous vehicles mainstream"
+                            },
+                            {
+                                "year": "2035",
+                                "goal": "AI surpasses human cognition in specialized tasks"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Checklist",
+            "description": "A slide presenting a to-do list or action items.",
+            "example": {
+                "type": "Checklist",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Project To-Do List"
+                    },
+                    {
+                        "position": "main",
+                        "type": "checklist",
+                        "items": [
+                            {
+                                "task": "Gather training data",
+                                "completed": true
+                            },
+                            {
+                                "task": "Develop AI model",
+                                "completed": false
+                            },
+                            {
+                                "task": "Test and evaluate",
+                                "completed": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Metrics",
+            "description": "A slide displaying key metrics or performance indicators.",
+            "example": {
+                "type": "Metrics",
+                "sections": [
+                    {
+                        "position": "top",
+                        "type": "title",
+                        "content": "AI Performance Metrics"
+                    },
+                    {
+                        "position": "main",
+                        "type": "metrics-grid",
+                        "metrics": [
+                            {
+                                "label": "Accuracy",
+                                "value": "98%"
+                            },
+                            {
+                                "label": "Response Time",
+                                "value": "120ms"
+                            },
+                            {
+                                "label": "Uptime",
+                                "value": "99.9%"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

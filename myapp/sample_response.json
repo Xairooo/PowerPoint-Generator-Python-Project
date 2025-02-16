@@ -1,0 +1,102 @@
+{
+  "slides": [
+    {
+      "title": "Basic Information of Lionel Messi",
+      "layout": {
+        "type": "TITLE_AND_CONTENT",
+        "sections": [
+          { "type": "title", "content": "Basic Information of Lionel Messi" },
+          { "type": "text", "content": "Born: June 24, 1987\nBirthplace: Rosario, Argentina" }
+        ]
+      }
+    },
+    {
+      "title": "Football Career",
+      "layout": {
+        "type": "TITLE_AND_CONTENT",
+        "sections": [
+          { "type": "title", "content": "Football Career" },
+          { "type": "bullets", "content": [
+              "Started career at Newell's Old Boys",
+              "Joined FC Barcelona youth academy (La Masia)",
+              "Professional debut for Barcelona in 2004",
+              "Won multiple La Liga and UEFA Champions League titles",
+              "Moved to Paris Saint-Germain in 2021",
+              "2022 FIFA World Cup winner with Argentina"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Achievements and Awards",
+      "layout": {
+        "type": "TWO_CONTENT",
+        "sections": [
+          { "type": "bullets", "content": [
+              "7 Ballon d'Or awards",
+              "Most goals in a calendar year (91 in 2012)",
+              "Top scorer in La Liga history",
+              "6 Golden Shoes (top European scorer)"
+            ]
+          },
+          { "type": "image", "content": "https://img.freepik.com/premium-photo/wallpaper-with-dark-dramatic-gradient-colors-ai-generated_88211-6704.jpg" }
+        ]
+      }
+    },
+    {
+      "title": "Messi's Style of Play",
+      "layout": {
+        "type": "PICTURE_WITH_CAPTION",
+        "sections": [
+          { "type": "image", "content": "https://img.freepik.com/premium-photo/wallpaper-with-dark-dramatic-gradient-colors-ai-generated_88211-6704.jpg" },
+          { "type": "text", "content": "Known for exceptional dribbling, playmaking, and goal-scoring abilities." }
+        ]
+      }
+    },
+    {
+      "title": "Timeline of Messi's Career",
+      "layout": {
+        "type": "VERTICAL_TITLE_AND_TEXT",
+        "sections": [
+          { "type": "title", "content": "Timeline of Messi's Career" },
+          { "type": "text", "content": "2000: Joined Barcelona Academy\n2004: Barcelona Debut\n2009: First Treble with Barcelona\n2012: 91 Goals in a Calendar Year\n2021: Joined PSG\n2022: World Cup Winner" }
+        ]
+      }
+    },
+    {
+      "title": "Comparison: Messi vs Other Legends",
+      "layout": {
+        "type": "COMPARISON",
+        "sections": [
+          { "type": "bullets", "content": [
+              "Lionel Messi: 7 Ballon d'Ors, 700+ goals, playmaker",
+              "Cristiano Ronaldo: 5 Ballon d'Ors, 800+ goals, athleticism",
+              "Diego Maradona: 1986 World Cup winner, magical dribbler",
+              "Pele: 3 World Cups, 1000+ goals, football icon"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Impact Off the Field",
+      "layout": {
+        "type": "TITLE_AND_VERTICAL_TEXT",
+        "sections": [
+          { "type": "title", "content": "Impact Off the Field" },
+          { "type": "text", "content": "Philanthropic work through the Leo Messi Foundation, ambassador roles, and influence in global football culture." }
+        ]
+      }
+    },
+    {
+      "title": "Legacy of Lionel Messi",
+      "layout": {
+        "type": "TITLE_ONLY",
+        "sections": [
+          { "type": "title", "content": "Legacy of Lionel Messi" }
+        ]
+      }
+    }
+  ]
+}

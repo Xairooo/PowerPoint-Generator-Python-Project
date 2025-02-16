@@ -1,0 +1,100 @@
+{
+  "slides": [
+    {
+      "title": "Basic Information of Messi",
+      "layout": {
+        "type": "TITLE_AND_CONTENT",
+        "sections": [
+          { "type": "title", "content": "Basic Information of Messi" },
+          { "type": "text", "content": "Born: June 24, 1987, Rosario, Argentina" }
+        ]
+      }
+    },
+    {
+      "title": "Football Career",
+      "layout": {
+        "type": "SECTION_HEADER",
+        "sections": [
+          { "type": "title", "content": "Football Career" }
+        ]
+      }
+    },
+    {
+      "title": "Early Years at Barcelona",
+      "layout": {
+        "type": "TITLE_AND_CONTENT",
+        "sections": [
+          { "type": "title", "content": "Early Years at Barcelona" },
+          { "type": "bullets", "content": ["Joined La Masia at 13", "Debut for FC Barcelona in 2004", "First goal at 17 years old"] }
+        ]
+      }
+    },
+    {
+      "title": "Achievements at Barcelona",
+      "layout": {
+        "type": "COMPARISON",
+        "sections": [
+          { "title": "Trophies", "content": ["10 La Liga titles", "4 Champions League titles"] },
+          { "title": "Individual Awards", "content": ["6 Ballon d'Or awards during his Barcelona career"] }
+        ]
+      }
+    },
+    {
+      "title": "Move to PSG",
+      "layout": {
+        "type": "CONTENT_WITH_CAPTION",
+        "sections": [
+          { "type": "title", "content": "Move to PSG" },
+          { "type": "text", "content": "Signed with Paris Saint-Germain in 2021 after 21 years at Barcelona" },
+          { "type": "image", "content": "https://img.freepik.com/premium-photo/wallpaper-with-dark-dramatic-gradient-colors-ai-generated_88211-6704.jpg" }
+        ]
+      }
+    },
+    {
+      "title": "World Cup Triumph 2022",
+      "layout": {
+        "type": "TWO_CONTENT",
+        "sections": [
+          { "type": "text", "content": "Led Argentina to World Cup victory in 2022" },
+          { "type": "image", "content": "https://img.freepik.com/premium-photo/wallpaper-with-dark-dramatic-gradient-colors-ai-generated_88211-6704.jpg" }
+        ]
+      }
+    },
+    {
+      "title": "Records and Achievements",
+      "layout": {
+        "type": "TITLE_AND_CONTENT",
+        "sections": [
+          { "type": "title", "content": "Records and Achievements" },
+          { "type": "bullets", "content": ["Most goals in La Liga", "Most hat-tricks in UEFA Champions League", "7 Ballon d'Or awards"] }
+        ]
+      }
+    },
+    {
+      "title": "Legacy and Influence",
+      "layout": {
+        "type": "TITLE_ONLY",
+        "sections": [
+          { "type": "title", "content": "Legacy and Influence" }
+        ]
+      }
+    },
+    {
+      "title": "Messi's Personal Life",
+      "layout": {
+        "type": "TITLE_AND_VERTICAL_TEXT",
+        "sections": [
+          { "type": "title", "content": "Messi's Personal Life" },
+          { "type": "text", "content": "Married to Antonela Roccuzzo, father of three children" }
+        ]
+      }
+    },
+    {
+      "title": "Conclusion",
+      "layout": {
+        "type": "BLANK",
+        "sections": []
+      }
+    }
+  ]
+}

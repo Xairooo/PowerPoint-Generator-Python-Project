@@ -11,11 +11,12 @@ function hideModal() {
 }
 
 // Event listener for the "Generate" button
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('generate-button').addEventListener('click', function(e) {
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('generate-button').addEventListener('click', function (e) {
         e.preventDefault();  // Prevent the default form submission
-        showModal();  // Show the modal
+        // showModal();  // Show the modal
 
+        const file = document.getElementById('custom_template').files[0]
 
         // Serialize form data and send it to the server via an AJAX POST request
         const formData = new FormData();
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('number_of_slide', document.getElementById('number_of_slide').value);
         formData.append('user_text', document.getElementById('user_text').value);
         formData.append('insert_image', document.getElementById('insert_image').checked);
+        formData.append('custom_template', file);
 
         const template_choice = document.querySelector('input[name="template_choice"]:checked').value;
         formData.append('template_choice', template_choice);
@@ -33,15 +35,15 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             body: formData
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();  // This assumes the server will return JSON
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();  // This assumes the server will return JSON
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     });
 });
 
