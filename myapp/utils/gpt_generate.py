@@ -5,8 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+
 def chat_development(user_message):
     conversation = build_conversation(user_message)
+    # print(conversation)
     try:
         assistant_message = generate_assistant_message(conversation)
     except openai.error.RateLimitError as e:
@@ -17,59 +19,87 @@ def chat_development(user_message):
 
 def build_conversation(user_message):
     return [
-        {"role": "system",
-         "content": """
-I am creating a slide presentation on 'Lionel Messi'. Here is the content for each slide:
-
-[ {"title": "[Basic Information of Message]", "content": "[Date of birth, where he was born]"}, {"title": "[Football career]", "content": "[Brief description, bullet points, or detailed text]"}, ... ]
-
-Can you suggest suitable slide layouts for each slide in JSON format?
-
-Automatically identify content structures such as lists, comparisons, timelines, summaries, etc.
-Use only these layout types:
-TITLE
-TITLE_AND_CONTENT
-SECTION_HEADER
-TWO_CONTENT
-COMPARISON
-TITLE_ONLY
-BLANK
-CONTENT_WITH_CAPTION
-PICTURE_WITH_CAPTION
-TITLE_AND_VERTICAL_TEXT
-VERTICAL_TITLE_AND_TEXT
-
+        {
+            "role": "developer",
+            "content": f"""
+Imagine you are an AI Slides generating tool. Based on the input of the user, generate additional relevant content and create the structure of the slides presentation as a JSON object.
 Return the entire response as a well-structured JSON object following this concise pattern:
-{
+{{
   "slides": [
-    {
+    {{
       "title": "Slide title",
-      "layout": {
-        "type": "TITLE | TITLE_AND_CONTENT | SECTION_HEADER | TWO_CONTENT | TITLE_ONLY | BLANK | CONTENT_WITH_CAPTION | PICTURE_WITH_CAPTION | TITLE_AND_VERTICAL_TEXT | VERTICAL_TITLE_AND_TEXT",
+      "layout": {{
+        "type": "TITLE",
         "sections": [
-          { "type": "title", "content": "..." },
-          { "type": "text/bullets/image", "content": "string | array | nested object" }
+          {{ "type": "title", "content": "<insert-content>" }},
+          {{ "type": "subtitle", "content": "<insert-subtitle>" }}
         ]
-      },
-      "layout": {
+      }}
+    }},
+    {{
+      "title": "Slide title",
+      "layout": {{
+        "type": "TITLE_AND_CONTENT",
+        "sections": [
+          {{ "type": "bullets", "content": [] }},
+          {{ "type": "text", "content": "" }}
+        ]
+      }}
+    }},
+    {{
+      "title": "Slide title",
+      "layout": {{
+        "type": "TWO_CONTENT",
+        "sections": [
+          {{ "type": "bullets", "content": [] }},
+          {{ "type": "image", "content": "" }}
+        ]
+      }}
+    }},
+    {{
+      "title": "Slide title",
+      "layout": {{
+        "type": "TITLE",
+        "sections": [
+          {{ "type": "subtitle", "content": "<insert-content>" }}
+        ]
+      }}
+    }},
+     {{
+      "title": "Slide title",
+      "layout": {{
         "type": "COMPARISON",
         "sections": [
-          { "position": "left", "title": "...", "content": ["..."] },
-          { "position": "right", "title": "...", "content": ["..."] }
+          {{ "position": "left", "title": "<insert-title>", "content": <insert-content>  }},
+          {{ "position": "right", "title": "<insert-title>", "content": <insert-content> }}
         ]
-      }
-    },
-    ...
+      }}
+    }},
+    {{
+      "title": "Slide title",
+      "layout": {{
+        "type": "PICTURE_WITH_CAPTION",
+        "sections": [
+          {{ "type": "image", "content": <insert-content>  }},
+          {{ "type": "caption", "content": <insert-content> }}
+        ]
+      }}
+    }}
   ]
-}
-
-Make the layout visually appropriate, clear, and engaging for the content type.
-"""},
-        {"role": "user", "content": user_message}
+}}
+Create 10 slides with at least 50 words for each slide.
+RESPOND WITH JSON ONLY
+"""
+        },
+        {
+            "role": "user",
+            "content":  user_message
+        }
     ]
 
 
 def generate_assistant_message(conversation):
+    print("start chatting with AI")
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=conversation

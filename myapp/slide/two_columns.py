@@ -2,6 +2,7 @@ from pptx import Presentation
 from pptx.util import Inches
 from .slide_enum import SlideLayout
 from models import BulletPointsSection, ImageSection, TextSection
+from utils.common import search_unsplash_images, create_image_stream
 from urllib.request import urlretrieve
 
 class TwoColumnSlide:
@@ -28,7 +29,7 @@ class TwoColumnSlide:
             if isinstance(section, BulletPointsSection):
                 self._add_bullet_points(placeholder_idx, section.items)
             elif isinstance(section, ImageSection):
-                self._add_image(placeholder_idx, section.description)
+                self._add_image(placeholder_idx, search_unsplash_images(title_text))
             elif isinstance(section, TextSection):
                 self._add_text(placeholder_idx, section.content)
 
@@ -48,15 +49,17 @@ class TwoColumnSlide:
         left = placeholder.left
         top = placeholder.top
         # print(left, top)
-        local_img_path = urlretrieve(image_path)[0]
-        self.slide.shapes.add_picture(local_img_path, left, top, width=Inches(6), height=Inches(4))
+        self.slide.shapes.add_picture(create_image_stream(image_path), left, top, width=Inches(6), height=Inches(4))
         # Preserve aspect ratio
         # placeholder.width = int(placeholder.width * 0.9)
         # placeholder.height = int(placeholder.height * 0.9)
 
     def _add_text(self, placeholder_idx, text):
         placeholder = self.slide.placeholders[placeholder_idx]
-        placeholder.text = text
+        if isinstance(text, list):
+            placeholder.text = '\n'.join(text)
+        else:
+            placeholder.text = text
 
     @staticmethod
     def from_json( prs, json_slide):

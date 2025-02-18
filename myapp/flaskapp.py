@@ -1,4 +1,5 @@
 import os
+from json import loads
 from flask import Flask, render_template, url_for, flash, redirect, request, send_from_directory, abort, jsonify
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
@@ -88,9 +89,9 @@ def generate():
     #         "Subject" : "Data Structures and Algorithms", 
     #     } 
     if request.method == 'POST':
-        print(request.content_type)
+        # print(request.content_type)
         custom_template = request.files['custom_template']
-        print(custom_template)
+        # print(custom_template)
         # file_input.save(f'./uploads/{file_input.filename}')
         number_of_slide = request.form.get('number_of_slide')
         user_text = request.form.get('user_text')
@@ -99,15 +100,22 @@ def generate():
         presenter_name = request.form.get('presenter_name')
         insert_image = 'insert_image' in request.form
 
-        prompt = """[ {"title": "[Basic Information of Message]", "content": "[Date of birth, where he was born]"}, {"title": "[Football career]", "content": "[Brief description, bullet points, or detailed text]"}, ... ]"""       
+        prompt = """[ {"title": "[Basic Information of Message]", "content": "Lionel Messi is an Argentine soccer player who plays for Inter Miami and the Argentina national team. He is considered one of the greatest soccer players of all time. 
+Basic information 
+1. Born on June 24, 1987 in Rosario, Argentina\n
+2. Plays as a forward\n
+3. Left-footed\n
+4. Known for his passing and ability to break through packed defenses"}, {"title": "[Football career]", "content": "[2004–2005: Rise to the first team, 2005–2006: Becoming a starting eleven player, 2006–2008: Improving form amid club decline, 2008–2009: First treble, 2009–2010: First Ballon d'Or, 2010–2011: Fifth La Liga title, third Champions League, two Ballon d'Ors]..."},  {"title": "Awards", "content": "[Club, national teams award, personal awards]..."}, {"title": "[Legendary]", "content": "[How he contributes to football]..."} ]"""       
 
-        assistant_response = chat_development(prompt)
+        assistant_response = chat_development(user_text)
+        # print(type(assistant_response))
+        # print(assistant_response)
         # # Check the response (for debug)
         # print(f"Assistant Response:\n{assistant_response}")
-        slides_content = {"slides":[{"title":"Introduction – Overview of AI Growth","layout":{"type":"Title","sections":[{"position":"top","type":"title","content":"The Future of AI"},{"position":"center","type":"subtitle","content":"Overview of AI Growth"},{"position":"background","type":"image","description":"Futuristic tech design"}]}},{"title":"Key Trends – AI in Healthcare, Finance, and Education","layout":{"type":"Grid","sections":[{"position":"top","type":"title","content":"Key Trends in AI"},{"position":"main","type":"three-columns","columns":[{"heading":"Healthcare","points":["Diagnostics","Personalized Medicine"],"icon":"🏥"},{"heading":"Finance","points":["Fraud Detection","Algorithmic Trading"],"icon":"💰"},{"heading":"Education","points":["Adaptive Learning","AI Tutors"],"icon":"🎓"}]}]}},{"title":"Challenges – Ethical Concerns and Job Displacement","layout":{"type":"List","sections":[{"position":"top","type":"title","content":"AI Challenges"},{"position":"main","type":"two-columns","columns":[{"heading":"Ethical Concerns","points":["Bias","Privacy","Accountability"],"icon":"⚖️"},{"heading":"Job Displacement","points":["Automation impact","Reskilling needs"],"icon":"🛠️"}]}]}},{"title":"Conclusion – Summary and Future Outlook","layout":{"type":"Summary","sections":[{"position":"top","type":"title","content":"Conclusion"},{"position":"main","type":"bullets","items":["AI is transforming industries","Key trends in healthcare, finance, and education","Addressing ethical concerns and job displacement"]},{"position":"bottom","type":"highlight","content":"The future of AI is promising, but responsible development is key."}]}}]}
+        # slides_content = {"slides":[{"title":"Introduction – Overview of AI Growth","layout":{"type":"Title","sections":[{"position":"top","type":"title","content":"The Future of AI"},{"position":"center","type":"subtitle","content":"Overview of AI Growth"},{"position":"background","type":"image","description":"Futuristic tech design"}]}},{"title":"Key Trends – AI in Healthcare, Finance, and Education","layout":{"type":"Grid","sections":[{"position":"top","type":"title","content":"Key Trends in AI"},{"position":"main","type":"three-columns","columns":[{"heading":"Healthcare","points":["Diagnostics","Personalized Medicine"],"icon":"🏥"},{"heading":"Finance","points":["Fraud Detection","Algorithmic Trading"],"icon":"💰"},{"heading":"Education","points":["Adaptive Learning","AI Tutors"],"icon":"🎓"}]}]}},{"title":"Challenges – Ethical Concerns and Job Displacement","layout":{"type":"List","sections":[{"position":"top","type":"title","content":"AI Challenges"},{"position":"main","type":"two-columns","columns":[{"heading":"Ethical Concerns","points":["Bias","Privacy","Accountability"],"icon":"⚖️"},{"heading":"Job Displacement","points":["Automation impact","Reskilling needs"],"icon":"🛠️"}]}]}},{"title":"Conclusion – Summary and Future Outlook","layout":{"type":"Summary","sections":[{"position":"top","type":"title","content":"Conclusion"},{"position":"main","type":"bullets","items":["AI is transforming industries","Key trends in healthcare, finance, and education","Addressing ethical concerns and job displacement"]},{"position":"bottom","type":"highlight","content":"The future of AI is promising, but responsible development is key."}]}}]}
         # print(type(slides_content))
         # create_ppt([], custom_template, presentation_title, presenter_name, insert_image)
-        create_ppt_v2([], custom_template, presentation_title, presenter_name, insert_image)
+        create_ppt_v2(loads(assistant_response), custom_template, presentation_title, presenter_name, insert_image)
     # return jsonify(data)
 
     return render_template('generator.html', title='Generate')

@@ -1,32 +1,61 @@
-I am creating a slide presentation on 'Lionel Messi'. Here is the content for each slide: 
-
-[ {"title": "[Basic Information of Message]", "content": "[Date of birth, where he was born]"}, {"title": "[Football career]", "content": "[Brief description, bullet points, or detailed text]"}, ... ] 
-
-Can you suggest suitable slide layouts for each slide in JSON format?
-
-Automatically identify content structures such as lists, comparisons, timelines, summaries, etc.
-Use only these layout types:
+Imagine you are an AI Slides generating tool. Based on the input of the user, create the structure of the slides presentation as a JSON object.
+You must use these 11 layout formats: TITLE | TITLE_AND_CONTENT | SECTION_HEADER | TWO_CONTENT | TITLE_ONLY | BLANK | CONTENT_WITH_CAPTION | PICTURE_WITH_CAPTION | TITLE_AND_VERTICAL_TEXT | VERTICAL_TITLE_AND_TEXT | COMPARISON
+and these section type: image | text | bullets for each section of layout
 Return the entire response as a well-structured JSON object following this concise pattern:
-{
+{{
   "slides": [
-    {
+    {{
       "title": "Slide title",
-      "layout": {
-        "type": "TITLE | TITLE_AND_CONTENT | SECTION_HEADER | TWO_CONTENT | TITLE_ONLY | BLANK | CONTENT_WITH_CAPTION | PICTURE_WITH_CAPTION | TITLE_AND_VERTICAL_TEXT | VERTICAL_TITLE_AND_TEXT",
+      "layout": {{
+        "type": "TITLE",
         "sections": [
-          { "type": "title", "content": "..." },
-          { "type": "text/bullets/image", content: string | array | nested object},
+          {{ "type": "title", "content": "<insert-content>" }},
+          {{ "type": "subtitle", "content": "<insert-subtitle>" }}
         ]
-      },
-      "layout": {
+      }}
+    }},
+    {{
+      "title": "Slide title",
+      "layout": {{
+        "type": "TITLE_AND_CONTENT",
+        "sections": [
+          {{ "type": "title", "content": "<insert-content>" }},
+          {{ "type": "bullets", "content": [] }},
+          {{ "type": "text", "content": "" }}
+        ]
+      }}
+    }},
+    {{
+      "title": "Slide title",
+      "layout": {{
+        "type": "TWO_CONTENT",
+        "sections": [
+          {{ "type": "title", "content": "<insert-content>" }},
+          {{ "type": "bullets", "content": [] }},
+          {{ "type": "image", "content": "" }}
+        ]
+      }}
+    }},
+    {{
+      "title": "Slide title",
+      "layout": {{
+        "type": "TITLE_ONLY",
+        "sections": [
+          {{ "type": "title", "content": "<insert-content>" }}
+        ]
+      }}
+    }},
+     {{
+      "title": "Slide title",
+      "layout": {{
         "type": "COMPARISON",
         "sections": [
-          { "position": "left", "title": "...", "content": [...] },
-          { "position": "right", "title": "...", "content": [...] },
+          {{ "position": "left", "title": "<insert-title>", "content": <insert-content>  }},
+          {{ "position": "right", "title": "<insert-title>", "content": <insert-content> }}
         ]
-      }
-    },
-    ...
+      }}
+    }}
   ]
-}
-Make the layout visually appropriate, clear, and engaging for the content type.
+}}
+For each slide, give the most important keywords (within five words) that represents the slide for each one . Be creative and factual with the content. Comply with the user's input. 
+RESPOND WITH JSON ONLY

@@ -63,7 +63,6 @@ def search_pexels_images(keyword):
             return data['photos'][0]['src']['medium']
     return None
 
-
 def delete_first_two_slides(presentation):
     slide_ids = [1, 0]
     for slide_id in slide_ids:
@@ -212,61 +211,63 @@ def create_ppt_v2(slides_content, template_choice, presentation_title, presenter
     # for _ in range(len(prs.slides)):
     #     xml_slides.remove(xml_slides[0])
 
-    TitleSlide(prs, presentation_title, f"Presented by {presenter_name}")
+    # TitleSlide(prs, presentation_title, f"Presented by {presenter_name}")
     content_slide_layout = prs.slide_layouts[1]
 
-    TitleContentWithBullets(prs, "Adding a Bullet Slide", [
-        ("Find the bullet slide layout", 0),
-        ("Use _TextFrame.text for first bullet", 1),
-        ("Use _TextFrame.add_paragraph() for subsequent bullets", 2)
-    ])
+    # TitleContentWithBullets(prs, "Adding a Bullet Slide", [
+    #     ("Find the bullet slide layout", 0),
+    #     ("Use _TextFrame.text for first bullet", 1),
+    #     ("Use _TextFrame.add_paragraph() for subsequent bullets", 2)
+    # ])
 
-    GridSlide(
-        prs,
-        "Grid Slide Example", 
-        rows=3, 
-        cols=4, 
-        cell_width=Inches(1.5), 
-        cell_height=Inches(1), 
-        spacing=Inches(0.2)
-    )
+    # GridSlide(
+    #     prs,
+    #     "Grid Slide Example", 
+    #     rows=3, 
+    #     cols=4, 
+    #     cell_width=Inches(1.5), 
+    #     cell_height=Inches(1), 
+    #     spacing=Inches(0.2)
+    # )
 
-    ArrowShape(prs, "Xin chao vietnam")
+    # ArrowShape(prs, "Xin chao vietnam")
 
-    ComparisonSlide(
-        prs,
-        "Comparison Slide Example",
-        "Left Column Title",
-        "This is the left column content.",
-        "Right Column Title",
-        "This is the right column content."
-    )
+    # ComparisonSlide(
+    #     prs,
+    #     "Comparison Slide Example",
+    #     "Left Column Title",
+    #     "This is the left column content.",
+    #     "Right Column Title",
+    #     "This is the right column content."
+    # )
 
-    ContentWithCaptionSlide(
-        prs,
-        "Left Column Title",
-        "This is the left column content.",
-        "Right Column Title",
-    )
+    # ContentWithCaptionSlide(
+    #     prs,
+    #     "Left Column Title",
+    #     "This is the left column content.",
+    #     "Right Column Title",
+    # )
 
-    PictureWithCaptionSlide(
-        prs,
-        "https://img.freepik.com/premium-photo/wallpaper-with-dark-dramatic-gradient-colors-ai-generated_88211-6704.jpg",
-        "This is the picture with caption.",
-        "This is the caption.",
-    )
+    # PictureWithCaptionSlide(
+    #     prs,
+    #     "https://img.freepik.com/premium-photo/wallpaper-with-dark-dramatic-gradient-colors-ai-generated_88211-6704.jpg",
+    #     "This is the picture with caption.",
+    #     "This is the caption.",
+    # )
 
-    TableSlide(prs, "Adding a Table")
+    # TableSlide(prs, "Adding a Table")
 
-    TitleAndVerticalTextSlide(prs, "Adding a Title and Vertical Text", "This is the vertical text.")
+    # TitleAndVerticalTextSlide(prs, "Adding a Title and Vertical Text", "This is the vertical text.")
 
     # TwoColumnSlide(prs, "Adding a Two Column Slide", "This is the left column content.", "This is the right column content.")
 
-    with open('sample_response_1.json') as f:
-        data = json.load(f)
-        slide_content = data['slides']
+    # with open('sample_response_1.json') as f:
+    #     data = json.load(f)
+    #     slide_content = data['slides']
 
-    for slide in slide_content:
+    print(slides_content)
+
+    for slide in slides_content['slides']:
         title = slide['title']
         layout = slide['layout']
         if layout['type'] == 'TITLE_AND_CONTENT':
@@ -288,7 +289,7 @@ def create_ppt_v2(slides_content, template_choice, presentation_title, presenter
             # pass
         elif layout['type'] == 'TITLE_AND_VERTICAL_TEXT':
             TitleAndVerticalTextSlide.from_json(prs, slide)
-        elif layout['type'] == 'TITLE_ONLY':
+        elif layout['type'] == 'TITLE':
             TitleSlide.from_json(prs, slide)
             # TitleSlide(prs, title, layout['sections'][0]['content'])
  
@@ -312,45 +313,45 @@ def create_ppt_v2(slides_content, template_choice, presentation_title, presenter
     #             run.font.color.rgb = RGBColor(255, 20, 147)  # RGB for deep pink color
 
     # add content slides
-    for slide_content in slides_content:
-        slide = prs.slides.add_slide(content_slide_layout)
+    # for slide_content in slides_content:
+    #     slide = prs.slides.add_slide(content_slide_layout)
 
-        for placeholder in slide.placeholders:
-            if placeholder.placeholder_format.type == 1:  # Title
-                placeholder.text = slide_content['title']
-                if template_choice == 'dark_modern':
-                    for paragraph in placeholder.text_frame.paragraphs:
-                        for run in paragraph.runs:
-                            run.font.name = 'Times New Roman'
-                            run.font.color.rgb = RGBColor(255, 165, 0)  # RGB for orange color
-            elif placeholder.placeholder_format.type == 7:  # Content
-                placeholder.text = slide_content['content']
-                if template_choice == 'dark_modern':
-                    for paragraph in placeholder.text_frame.paragraphs:
-                        for run in paragraph.runs:
-                            run.font.name = 'Times New Roman'
-                            run.font.color.rgb = RGBColor(255, 255, 255)  # RGB for white color
+    #     for placeholder in slide.placeholders:
+    #         if placeholder.placeholder_format.type == 1:  # Title
+    #             placeholder.text = slide_content['title']
+    #             if template_choice == 'dark_modern':
+    #                 for paragraph in placeholder.text_frame.paragraphs:
+    #                     for run in paragraph.runs:
+    #                         run.font.name = 'Times New Roman'
+    #                         run.font.color.rgb = RGBColor(255, 165, 0)  # RGB for orange color
+    #         elif placeholder.placeholder_format.type == 7:  # Content
+    #             placeholder.text = slide_content['content']
+    #             if template_choice == 'dark_modern':
+    #                 for paragraph in placeholder.text_frame.paragraphs:
+    #                     for run in paragraph.runs:
+    #                         run.font.name = 'Times New Roman'
+    #                         run.font.color.rgb = RGBColor(255, 255, 255)  # RGB for white color
 
-        if insert_image:
-            # fetch image URL from Pixabay based on the slide's title
-            image_url = search_pexels_images(slide_content['keyword'])
-            print("Image URL:", image_url) #debug
-            if image_url is not None:
-                # download the image
-                image_data = requests.get(image_url).content
-                # load image into BytesIO object
-                image_stream = io.BytesIO(image_data)
-                # add the image at the specified position
-                slide_width = Inches(20)
-                slide_height = Inches(15)
+        # if insert_image:
+        #     # fetch image URL from Pixabay based on the slide's title
+        #     image_url = search_pexels_images(slide_content['keyword'])
+        #     print("Image URL:", image_url) #debug
+        #     if image_url is not None:
+        #         # download the image
+        #         image_data = requests.get(image_url).content
+        #         # load image into BytesIO object
+        #         image_stream = io.BytesIO(image_data)
+        #         # add the image at the specified position
+        #         slide_width = Inches(20)
+        #         slide_height = Inches(15)
 
-                image_width = Inches(8)  # width of image
-                image_height = Inches(5)  # height of image
+        #         image_width = Inches(8)  # width of image
+        #         image_height = Inches(5)  # height of image
 
-                left = slide_width - image_width  # calculate left position
-                top = slide_height - image_height - Inches(4)  # calculate top position
+        #         left = slide_width - image_width  # calculate left position
+        #         top = slide_height - image_height - Inches(4)  # calculate top position
 
-                slide.shapes.add_picture(image_stream, left, top, width=image_width, height=image_height)
+        #         slide.shapes.add_picture(image_stream, left, top, width=image_width, height=image_height)
 
     # add credits slide
     slide = prs.slides.add_slide(content_slide_layout)

@@ -2,6 +2,7 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 from .slide_enum import SlideLayout
 from pptx.enum.shapes import MSO_SHAPE
+from utils.common import fallback_string
 
 class ComparisonSlide:
     def __init__(self, prs, title_text, left_title, left_content, right_title, right_content):
@@ -51,9 +52,9 @@ class ComparisonSlide:
         title = json_slide["title"]
         sections = json_slide["layout"]["sections"]
         left_title = sections[0]["title"]
-        left_content = '\n'.join(sections[0]["content"])
+        left_content = fallback_string(sections[0]["content"])
         right_title = sections[1]["title"]
-        right_content = '\n'.join(sections[1]["content"])
+        right_content = fallback_string(sections[1]["content"])
         return ComparisonSlide(prs, title, left_title, left_content, right_title, right_content)
     
     def save(self, filename):

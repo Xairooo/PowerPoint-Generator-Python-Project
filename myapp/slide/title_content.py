@@ -1,6 +1,7 @@
 from pptx import Presentation
 from pptx.util import Pt
 from .slide_enum import SlideLayout
+from utils.common import fallback_string
 from models import BulletPointsSection  # Import from your dataclasses  
 
 class TitleContentSlide:
@@ -35,12 +36,12 @@ class TitleContentSlide:
         layout = json_slide["layout"]
         
         # Find bullet points section
-        content_section = layout['sections'][1]
-        
-        if content_section['type'] == 'text':
-            return TitleContentSlide(prs, title, content_section['content'])
+        content_section = [x for x in layout['sections'] if x["type"] == 'text' or x["type"] == 'title'][0]["content"]
+        bullets = [x for x in layout['sections'] if x["type"] == 'bullets'][0]['content']
+        if content_section and content_section != "":
+            return TitleContentSlide(prs, title, fallback_string(content_section))
             
-        return TitleContentSlide(prs, title, BulletPointsSection("body", content_section['content']))
+        return TitleContentSlide(prs, title, BulletPointsSection("body", bullets))
 
     def save(self, filename):
         self.prs.save(filename)
