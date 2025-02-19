@@ -107,7 +107,8 @@ Basic information
 3. Left-footed\n
 4. Known for his passing and ability to break through packed defenses"}, {"title": "[Football career]", "content": "[2004–2005: Rise to the first team, 2005–2006: Becoming a starting eleven player, 2006–2008: Improving form amid club decline, 2008–2009: First treble, 2009–2010: First Ballon d'Or, 2010–2011: Fifth La Liga title, third Champions League, two Ballon d'Ors]..."},  {"title": "Awards", "content": "[Club, national teams award, personal awards]..."}, {"title": "[Legendary]", "content": "[How he contributes to football]..."} ]"""       
 
-        assistant_response = chat_development(user_text)
+        assistant_response = chat_development(f"I want you to come up with the idea for the PowerPoint. The number of slides is {number_of_slide}. " \
+                       f"The content is: {user_text}")
         # print(type(assistant_response))
         # print(assistant_response)
         # # Check the response (for debug)

@@ -22,6 +22,7 @@ from slide.TitleAndVerticalTextSlide import TitleAndVerticalTextSlide
 from slide.VerticalTitleAndTextSlide import VerticalTitleAndTextSlide
 from slide.title_content import TitleContentSlide
 from slide.two_columns import TwoColumnSlide
+from slide.slide_enum import SlideLayout
 dir_path = 'static/presentations'
 
 load_dotenv()
@@ -149,6 +150,15 @@ def create_ppt(slides_content, template_choice, presentation_title, presenter_na
                 slide.shapes.add_picture(image_stream, left, top, width=image_width, height=image_height)
 
     # add credits slide
+    add_credit_slide(template_choice, prs, content_slide_layout)
+
+    # Delete the first two slides after all new slides have been added
+    delete_first_two_slides(prs)
+
+    # Save the presentation
+    prs.save(os.path.join('generated', f"generated_presentation_{datetime.datetime.now()}.pptx"))
+
+def add_credit_slide(template_choice, prs, content_slide_layout):
     slide = prs.slides.add_slide(content_slide_layout)
     if template_choice == 'dark_modern':
         for placeholder in slide.placeholders:
@@ -156,13 +166,13 @@ def create_ppt(slides_content, template_choice, presentation_title, presenter_na
                 placeholder.text = "Credits"
                 for paragraph in placeholder.text_frame.paragraphs:
                     for run in paragraph.runs:
-                        run.font.name = 'Times New Roman'
+                        # run.font.name = 'Times New Roman'
                         run.font.color.rgb = RGBColor(255, 165, 0)
             elif placeholder.placeholder_format.type == 7:  # Content
-                placeholder.text = "Images provided by Pexels: https://www.pexels.com"
+                placeholder.text = "Images provided by Unsplash: https://unsplash.com/"
                 for paragraph in placeholder.text_frame.paragraphs:
                     for run in paragraph.runs:
-                        run.font.name = 'Times New Roman'
+                        # run.font.name = 'Times New Roman'
                         run.font.color.rgb = RGBColor(255, 255, 255)
 
     elif template_choice == 'bright_modern':
@@ -174,7 +184,7 @@ def create_ppt(slides_content, template_choice, presentation_title, presenter_na
                         run.font.name = 'Arial'
                         run.font.color.rgb = RGBColor(255, 20, 147)
             elif placeholder.placeholder_format.type == 7:  # Content
-                placeholder.text = "Images provided by Pexels: https://www.pexels.com"
+                placeholder.text = "Images provided by Unsplash: https://unsplash.com/"
                 for paragraph in placeholder.text_frame.paragraphs:
                     for run in paragraph.runs:
                         run.font.name = 'Arial'
@@ -189,23 +199,31 @@ def create_ppt(slides_content, template_choice, presentation_title, presenter_na
                         run.font.name = 'Arial'
                         run.font.color.rgb = RGBColor(0, 0, 0)
             elif placeholder.placeholder_format.type == 7:  # Content
-                placeholder.text = "Images provided by Pexels: https://www.pexels.com"
+                placeholder.text = "Images provided by Unsplash: https://unsplash.com/"
                 for paragraph in placeholder.text_frame.paragraphs:
                     for run in paragraph.runs:
                         run.font.name = 'Arial'
                         run.font.color.rgb = RGBColor(0, 0, 0)
+                        
+def add_introduction_slide(prs, presentation_title, presenter_name):
+    title_slide_layout = prs.slide_layouts[SlideLayout.TITLE]
 
-    # Delete the first two slides after all new slides have been added
-    delete_first_two_slides(prs)
+    # add title slide
+    slide = prs.slides.add_slide(title_slide_layout)
+    title = slide.shapes.title
+    title.text = presentation_title
 
-    # Save the presentation
-    prs.save(os.path.join('generated', f"generated_presentation_{datetime.datetime.now()}.pptx"))
+    #add subtitle
+    subtitle = slide.placeholders[1]
+    subtitle.text = f"Presented by {presenter_name}"
 
 def create_ppt_v2(slides_content, template_choice, presentation_title, presenter_name, insert_image):
     # template_path = os.path.join(dir_path, f"{template_choice}.pptx")
 
     prs = Presentation(template_choice)
     template_choice = 'dark_modern'
+    
+    add_introduction_slide(prs, presentation_title, presenter_name)
 
     # xml_slides = prs.slides._sldIdLst
     # for _ in range(len(prs.slides)):
@@ -265,8 +283,6 @@ def create_ppt_v2(slides_content, template_choice, presentation_title, presenter
     #     data = json.load(f)
     #     slide_content = data['slides']
 
-    print(slides_content)
-
     for slide in slides_content['slides']:
         title = slide['title']
         layout = slide['layout']
@@ -292,113 +308,8 @@ def create_ppt_v2(slides_content, template_choice, presentation_title, presenter
         elif layout['type'] == 'TITLE':
             TitleSlide.from_json(prs, slide)
             # TitleSlide(prs, title, layout['sections'][0]['content'])
- 
-    # print(data)
-
-    # for idx, layout in enumerate(prs.slide_layouts):
-    #     print(f"Layout {idx}: {layout.name}")
-    #     for placeholder in layout.placeholders:
-    #         print(f"  Placeholder {placeholder.placeholder_format.idx}: {placeholder.name}")
-
-    # if template_choice == 'dark_modern':
-    #     for paragraph in title.text_frame.paragraphs:
-    #         for run in paragraph.runs:
-    #             run.font.name = 'Times New Roman'
-    #             run.font.color.rgb = RGBColor(255, 165, 0)  # RGB for orange color
-
-    # elif template_choice == 'bright_modern':
-    #     for paragraph in title.text_frame.paragraphs:
-    #         for run in paragraph.runs:
-    #             run.font.name = 'Arial'
-    #             run.font.color.rgb = RGBColor(255, 20, 147)  # RGB for deep pink color
-
-    # add content slides
-    # for slide_content in slides_content:
-    #     slide = prs.slides.add_slide(content_slide_layout)
-
-    #     for placeholder in slide.placeholders:
-    #         if placeholder.placeholder_format.type == 1:  # Title
-    #             placeholder.text = slide_content['title']
-    #             if template_choice == 'dark_modern':
-    #                 for paragraph in placeholder.text_frame.paragraphs:
-    #                     for run in paragraph.runs:
-    #                         run.font.name = 'Times New Roman'
-    #                         run.font.color.rgb = RGBColor(255, 165, 0)  # RGB for orange color
-    #         elif placeholder.placeholder_format.type == 7:  # Content
-    #             placeholder.text = slide_content['content']
-    #             if template_choice == 'dark_modern':
-    #                 for paragraph in placeholder.text_frame.paragraphs:
-    #                     for run in paragraph.runs:
-    #                         run.font.name = 'Times New Roman'
-    #                         run.font.color.rgb = RGBColor(255, 255, 255)  # RGB for white color
-
-        # if insert_image:
-        #     # fetch image URL from Pixabay based on the slide's title
-        #     image_url = search_pexels_images(slide_content['keyword'])
-        #     print("Image URL:", image_url) #debug
-        #     if image_url is not None:
-        #         # download the image
-        #         image_data = requests.get(image_url).content
-        #         # load image into BytesIO object
-        #         image_stream = io.BytesIO(image_data)
-        #         # add the image at the specified position
-        #         slide_width = Inches(20)
-        #         slide_height = Inches(15)
-
-        #         image_width = Inches(8)  # width of image
-        #         image_height = Inches(5)  # height of image
-
-        #         left = slide_width - image_width  # calculate left position
-        #         top = slide_height - image_height - Inches(4)  # calculate top position
-
-        #         slide.shapes.add_picture(image_stream, left, top, width=image_width, height=image_height)
-
-    # add credits slide
-    slide = prs.slides.add_slide(content_slide_layout)
-    if template_choice == 'dark_modern':
-        for placeholder in slide.placeholders:
-            if placeholder.placeholder_format.type == 1:  # Title
-                placeholder.text = "Credits"
-                for paragraph in placeholder.text_frame.paragraphs:
-                    for run in paragraph.runs:
-                        run.font.name = 'Times New Roman'
-                        run.font.color.rgb = RGBColor(255, 165, 0)
-            elif placeholder.placeholder_format.type == 7:  # Content
-                placeholder.text = "Images provided by Pexels: https://www.pexels.com"
-                for paragraph in placeholder.text_frame.paragraphs:
-                    for run in paragraph.runs:
-                        run.font.name = 'Times New Roman'
-                        run.font.color.rgb = RGBColor(255, 255, 255)
-
-    elif template_choice == 'bright_modern':
-        for placeholder in slide.placeholders:
-            if placeholder.placeholder_format.type == 1:  # Title
-                placeholder.text = "Credits"
-                for paragraph in placeholder.text_frame.paragraphs:
-                    for run in paragraph.runs:
-                        run.font.name = 'Arial'
-                        run.font.color.rgb = RGBColor(255, 20, 147)
-            elif placeholder.placeholder_format.type == 7:  # Content
-                placeholder.text = "Images provided by Pexels: https://www.pexels.com"
-                for paragraph in placeholder.text_frame.paragraphs:
-                    for run in paragraph.runs:
-                        run.font.name = 'Arial'
-                        run.font.color.rgb = RGBColor(0, 0, 0)
-
-    else:
-        for placeholder in slide.placeholders:
-            if placeholder.placeholder_format.type == 1:  # Title
-                placeholder.text = "Credits"
-                for paragraph in placeholder.text_frame.paragraphs:
-                    for run in paragraph.runs:
-                        run.font.name = 'Arial'
-                        run.font.color.rgb = RGBColor(0, 0, 0)
-            elif placeholder.placeholder_format.type == 7:  # Content
-                placeholder.text = "Images provided by Pexels: https://www.pexels.com"
-                for paragraph in placeholder.text_frame.paragraphs:
-                    for run in paragraph.runs:
-                        run.font.name = 'Arial'
-                        run.font.color.rgb = RGBColor(0, 0, 0)
+            
+    add_credit_slide(template_choice, prs, content_slide_layout)
 
     # Delete the first two slides after all new slides have been added
     delete_first_two_slides(prs)

@@ -31,7 +31,6 @@ Return the entire response as a well-structured JSON object following this conci
       "layout": {{
         "type": "TITLE",
         "sections": [
-          {{ "type": "title", "content": "<insert-content>" }},
           {{ "type": "subtitle", "content": "<insert-subtitle>" }}
         ]
       }}
@@ -53,15 +52,6 @@ Return the entire response as a well-structured JSON object following this conci
         "sections": [
           {{ "type": "bullets", "content": [] }},
           {{ "type": "image", "content": "" }}
-        ]
-      }}
-    }},
-    {{
-      "title": "Slide title",
-      "layout": {{
-        "type": "TITLE",
-        "sections": [
-          {{ "type": "subtitle", "content": "<insert-content>" }}
         ]
       }}
     }},
@@ -87,7 +77,7 @@ Return the entire response as a well-structured JSON object following this conci
     }}
   ]
 }}
-Create 10 slides with at least 50 words for each slide.
+Create (the number of the slide) slides with at least 50 words for each slide. For each section of type bullets, provide at least 5 points. For each section of type text or title, provide content with at least 40 words.
 RESPOND WITH JSON ONLY
 """
         },
