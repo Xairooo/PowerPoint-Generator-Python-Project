@@ -1,6 +1,6 @@
 import os
 from json import loads
-from flask import Flask, render_template, url_for, flash, redirect, request, send_from_directory, abort, jsonify
+from flask import Flask, render_template, url_for, flash, redirect, request, send_from_directory, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from forms import RegistrationForm, LoginForm
@@ -8,7 +8,7 @@ from flask_bcrypt import Bcrypt
 from database import db
 from models import User
 from utils.gpt_generate import chat_development
-from utils.text_pp import parse_response, create_ppt, create_ppt_v2
+from utils.text_pp import create_ppt_v2
 from dotenv import load_dotenv
 
 load_dotenv()  # This loads the .env file
@@ -47,8 +47,10 @@ def profile():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        hashed_password = bcrypt.generate_password_hash(
+            form.password.data).decode('utf-8')
+        user = User(username=form.username.data,
+                    email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         login_user(user, remember=True)
@@ -74,7 +76,6 @@ def login():
     return render_template('login.html', title='Login', form=form, user=current_user)
 
 
-
 @app.route('/logout')
 @login_required
 def logout():
@@ -84,10 +85,6 @@ def logout():
 
 @app.route('/generator', methods=['GET', 'POST'])
 def generate():
-    # data = { 
-    #         "Modules" : 15, 
-    #         "Subject" : "Data Structures and Algorithms", 
-    #     } 
     if request.method == 'POST':
         # print(request.content_type)
         custom_template = request.files['custom_template']
@@ -99,26 +96,10 @@ def generate():
         presentation_title = request.form.get('presentation_title')
         presenter_name = request.form.get('presenter_name')
         insert_image = 'insert_image' in request.form
-
-        prompt = """[ {"title": "[Basic Information of Message]", "content": "Lionel Messi is an Argentine soccer player who plays for Inter Miami and the Argentina national team. He is considered one of the greatest soccer players of all time. 
-Basic information 
-1. Born on June 24, 1987 in Rosario, Argentina\n
-2. Plays as a forward\n
-3. Left-footed\n
-4. Known for his passing and ability to break through packed defenses"}, {"title": "[Football career]", "content": "[2004–2005: Rise to the first team, 2005–2006: Becoming a starting eleven player, 2006–2008: Improving form amid club decline, 2008–2009: First treble, 2009–2010: First Ballon d'Or, 2010–2011: Fifth La Liga title, third Champions League, two Ballon d'Ors]..."},  {"title": "Awards", "content": "[Club, national teams award, personal awards]..."}, {"title": "[Legendary]", "content": "[How he contributes to football]..."} ]"""       
-
-        assistant_response = chat_development(f"I want you to come up with the idea for the PowerPoint. The number of slides is {number_of_slide}. " \
-                       f"The content is: {user_text}")
-        # print(type(assistant_response))
-        # print(assistant_response)
-        # # Check the response (for debug)
-        # print(f"Assistant Response:\n{assistant_response}")
-        # slides_content = {"slides":[{"title":"Introduction – Overview of AI Growth","layout":{"type":"Title","sections":[{"position":"top","type":"title","content":"The Future of AI"},{"position":"center","type":"subtitle","content":"Overview of AI Growth"},{"position":"background","type":"image","description":"Futuristic tech design"}]}},{"title":"Key Trends – AI in Healthcare, Finance, and Education","layout":{"type":"Grid","sections":[{"position":"top","type":"title","content":"Key Trends in AI"},{"position":"main","type":"three-columns","columns":[{"heading":"Healthcare","points":["Diagnostics","Personalized Medicine"],"icon":"🏥"},{"heading":"Finance","points":["Fraud Detection","Algorithmic Trading"],"icon":"💰"},{"heading":"Education","points":["Adaptive Learning","AI Tutors"],"icon":"🎓"}]}]}},{"title":"Challenges – Ethical Concerns and Job Displacement","layout":{"type":"List","sections":[{"position":"top","type":"title","content":"AI Challenges"},{"position":"main","type":"two-columns","columns":[{"heading":"Ethical Concerns","points":["Bias","Privacy","Accountability"],"icon":"⚖️"},{"heading":"Job Displacement","points":["Automation impact","Reskilling needs"],"icon":"🛠️"}]}]}},{"title":"Conclusion – Summary and Future Outlook","layout":{"type":"Summary","sections":[{"position":"top","type":"title","content":"Conclusion"},{"position":"main","type":"bullets","items":["AI is transforming industries","Key trends in healthcare, finance, and education","Addressing ethical concerns and job displacement"]},{"position":"bottom","type":"highlight","content":"The future of AI is promising, but responsible development is key."}]}}]}
-        # print(type(slides_content))
-        # create_ppt([], custom_template, presentation_title, presenter_name, insert_image)
-        create_ppt_v2(loads(assistant_response), custom_template, presentation_title, presenter_name, insert_image)
-    # return jsonify(data)
-
+        assistant_response = chat_development(f"I want you to come up with the idea for the PowerPoint. The number of slides is {number_of_slide}. "
+                                              f"The content is: {user_text}")
+        create_ppt_v2(assistant_response, custom_template,
+                      presentation_title, presenter_name, insert_image)
     return render_template('generator.html', title='Generate')
 
 

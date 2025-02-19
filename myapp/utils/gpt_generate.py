@@ -1,5 +1,6 @@
 import os
 import openai
+from json import loads
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -8,13 +9,12 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def chat_development(user_message):
     conversation = build_conversation(user_message)
-    # print(conversation)
     try:
         assistant_message = generate_assistant_message(conversation)
     except openai.error.RateLimitError as e:
         assistant_message = "Rate limit exceeded. Sleeping for a bit..."
 
-    return assistant_message
+    return loads(assistant_message)
 
 
 def build_conversation(user_message):

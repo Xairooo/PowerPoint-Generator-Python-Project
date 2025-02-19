@@ -11,13 +11,9 @@ from pptx.util import Inches
 from urllib.parse import quote_plus
 from dotenv import load_dotenv
 from slide.title_slide import TitleSlide
-from slide.grid import GridSlide
-from slide.title_content_bullets import TitleContentWithBullets
-from slide.arrow_shape import ArrowShape
 from slide.comparison import ComparisonSlide
 from slide.content_with_caption import ContentWithCaptionSlide
 from slide.picture_with_caption import PictureWithCaptionSlide
-from slide.table import TableSlide
 from slide.TitleAndVerticalTextSlide import TitleAndVerticalTextSlide
 from slide.VerticalTitleAndTextSlide import VerticalTitleAndTextSlide
 from slide.title_content import TitleContentSlide

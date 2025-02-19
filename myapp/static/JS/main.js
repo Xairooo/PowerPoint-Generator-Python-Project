@@ -24,10 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
         formData.append('presenter_name', document.getElementById('presenter_name').value);
         formData.append('number_of_slide', document.getElementById('number_of_slide').value);
         formData.append('user_text', document.getElementById('user_text').value);
-        formData.append('insert_image', document.getElementById('insert_image').checked);
         formData.append('custom_template', file);
 
-        const template_choice = document.querySelector('input[name="template_choice"]:checked').value;
+        const template_choice = 'dark_modern';
         formData.append('template_choice', template_choice);
         // ... append other form data similarly
         console.log([...formData]);  // Check the logged output to ensure the data is correct
